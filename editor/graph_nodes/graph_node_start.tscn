@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0jjvqdpbss45"]
+
+[ext_resource type="Script" path="res://addons/dialog_system/editor/graph_nodes/graph_node_start.gd" id="1"]
+
+[node name="GraphNodeStart" type="GraphNode"]
+offset_right = 200.0
+offset_bottom = 80.0
+position_offset = Vector2(100, 100)
+title = "▶ Inicio"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblDesc" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+text = "Punto de entrada"
+
+[node name="FieldLabel" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Inicio"

@@ -22,15 +22,29 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="BtnAddDialog" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="OptNodeType" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "+ Dialog"
+selected = 0
+item_count = 7
+popup/item_0/text = "💬  Diálogo"
+popup/item_1/text = "🖼  Imagen"
+popup/item_1/id = 1
+popup/item_2/text = "🎲  Aleatorio"
+popup/item_2/id = 2
+popup/item_3/text = "❓  Condición"
+popup/item_3/id = 3
+popup/item_4/text = "▶  Inicio"
+popup/item_4/id = 4
+popup/item_5/text = "⏹  Fin"
+popup/item_5/id = 5
+popup/item_6/text = "✨  Animación"
+popup/item_6/id = 6
 
-[node name="BtnAddImage" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="BtnAdd" type="Button" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "+ Image"
+text = "+"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -67,7 +81,7 @@ offset_left = -290.0
 offset_bottom = 23.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 12
-text = "● Listo. Agrega nodos para comenzar."
+text = "● v1.1 lista. Selecciona un tipo y pulsa '+'."
 horizontal_alignment = 2
 vertical_alignment = 1
 

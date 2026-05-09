@@ -128,3 +128,140 @@ func skip_typing() -> void:
 ## Muestra u oculta el indicador de "presiona para avanzar"
 func show_advance_indicator(visible_val: bool) -> void:
 	advance_indicator.visible = visible_val
+
+
+## Aplica la configuración de animación definida por un nodo ANIMATION.
+## Llama las animaciones del AnimationPlayer en el orden indicado.
+func apply_animation_config(anim_names: Array[String], order: int) -> void:
+	if anim_names.is_empty():
+		return
+
+	match order:
+		DialogNodeData.AnimationOrder.SEQUENTIAL:
+			# Reproduce una tras otra
+			for anim_name in anim_names:
+				if anim_player.has_animation(anim_name):
+					anim_player.play(anim_name)
+					await anim_player.animation_finished
+
+		DialogNodeData.AnimationOrder.SIMULTANEOUS:
+			# Lanza todas a la vez y espera a la más larga
+			var longest: float = 0.0
+			for anim_name in anim_names:
+				if anim_player.has_animation(anim_name):
+					var length := anim_player.get_animation(anim_name).length
+					if length > longest:
+						longest = length
+					anim_player.play(anim_name)
+			if longest > 0.0:
+				await get_tree().create_timer(longest).timeout
+				
+func apply_tween_config(data: DialogNodeData) -> void:
+	var tween := create_tween()
+
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+
+	if data.tween_delay > 0.0:
+		tween.tween_interval(data.tween_delay)
+
+	match data.tween_type:
+
+		DialogNodeData.TweenType.NONE:
+			return
+
+		DialogNodeData.TweenType.FADE:
+			modulate.a = 0.0
+
+			tween.tween_property(
+				self,
+				"modulate:a",
+				1.0,
+				data.tween_duration
+			)
+
+		DialogNodeData.TweenType.SLIDE_LEFT:
+			var target := position
+
+			position.x -= data.tween_offset.x
+
+			tween.tween_property(
+				self,
+				"position",
+				target,
+				data.tween_duration
+			)
+
+		DialogNodeData.TweenType.SLIDE_RIGHT:
+			var target := position
+
+			position.x += data.tween_offset.x
+
+			tween.tween_property(
+				self,
+				"position",
+				target,
+				data.tween_duration
+			)
+
+		DialogNodeData.TweenType.SLIDE_UP:
+			var target := position
+
+			position.y += data.tween_offset.y
+
+			tween.tween_property(
+				self,
+				"position",
+				target,
+				data.tween_duration
+			)
+
+		DialogNodeData.TweenType.SLIDE_DOWN:
+			var target := position
+
+			position.y -= data.tween_offset.y
+
+			tween.tween_property(
+				self,
+				"position",
+				target,
+				data.tween_duration
+			)
+
+		DialogNodeData.TweenType.SCALE:
+			var target := scale
+
+			scale = data.tween_start_scale
+
+			tween.tween_property(
+				self,
+				"scale",
+				target,
+				data.tween_duration
+			)
+
+		DialogNodeData.TweenType.POP:
+			scale = Vector2(0.7, 0.7)
+
+			tween.tween_property(
+				self,
+				"scale",
+				Vector2(1.08, 1.08),
+				data.tween_duration * 0.6
+			)
+
+			tween.tween_property(
+				self,
+				"scale",
+				Vector2.ONE,
+				data.tween_duration * 0.4
+			)
+
+		DialogNodeData.TweenType.BOUNCE:
+			scale = Vector2(0.6, 0.6)
+
+			tween.tween_property(
+				self,
+				"scale",
+				Vector2.ONE,
+				data.tween_duration
+			).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)

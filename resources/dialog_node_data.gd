@@ -2,16 +2,24 @@
 class_name DialogNodeData
 extends Resource
 
-## Tipos de nodo disponibles en el grafo
+# ──── Enums ─────────────────────────────────────────────────────────────────
+
+## Todos los tipos de nodo disponibles en el grafo
 enum NodeType {
-	DIALOG,  ## Nodo de texto/diálogo
-	IMAGE,   ## Nodo de inyección de imagen
+	DIALOG,     ## Nodo de texto/diálogo
+	IMAGE,      ## Nodo de inyección de imagen
+	# v1.1 ────────────────────
+	RANDOM,     ## Selector aleatorio de ramas
+	CONDITION,  ## Evaluador de condición lógica
+	START,      ## Punto de entrada del flujo
+	END,        ## Punto de cierre del flujo
+	ANIMATION,  ## Configurador de animación de entrada del textbox
 }
 
 ## Tipo de flujo del diálogo
 enum FlowType {
-	SKIPPABLE,    ## El jugador puede saltar la animación y avanzar manualmente
-	AUTO,         ## Avanza solo por tiempo o señal externa (no skippable)
+	SKIPPABLE,  ## El jugador puede saltar la animación y avanzar manualmente
+	AUTO,       ## Avanza solo por tiempo o señal externa (no skippable)
 }
 
 ## Posición del icono del personaje
@@ -21,16 +29,46 @@ enum IconPosition {
 	DUO,    ## Icono en ambos lados (modo duo)
 }
 
-# Identificador único del nodo
+## Operadores de comparación para el nodo CONDITION
+enum ConditionOperator {
+	EQUALS,         ## variable == valor
+	NOT_EQUALS,     ## variable != valor
+	GREATER,        ## variable > valor
+	LESS,           ## variable < valor
+	GREATER_EQUAL,  ## variable >= valor
+	LESS_EQUAL,     ## variable <= valor
+}
+
+## Orden de reproducción de animaciones (nodo ANIMATION)
+enum AnimationOrder {
+	SEQUENTIAL,    ## Una tras otra
+	SIMULTANEOUS,  ## Todas a la vez
+}
+
+## Tipos de tween para el textbox
+enum TweenType {
+	NONE,
+	FADE,
+	SLIDE_LEFT,
+	SLIDE_RIGHT,
+	SLIDE_UP,
+	SLIDE_DOWN,
+	SCALE,
+	POP,
+	BOUNCE,
+}
+# ──── Campos comunes ─────────────────────────────────────────────────────────
+
+## Identificador único del nodo
 @export var id: String = ""
 
-# Tipo de nodo
+## Tipo de nodo
 @export var node_type: NodeType = NodeType.DIALOG
 
-# Posición en el GraphEdit (para el editor)
+## Posición en el GraphEdit (para el editor)
 @export var graph_position: Vector2 = Vector2.ZERO
 
-# ──── Campos del nodo DIALOG ────────────────────────────────────────────────
+# ──── Campos del nodo DIALOG ─────────────────────────────────────────────────
 
 ## Nombre del personaje que habla
 @export var character_name: String = ""
@@ -56,20 +94,54 @@ enum IconPosition {
 ## Lista de pistas de audio simultáneas (rutas a AudioStream)
 @export var audio_tracks: Array[String] = []
 
-# ──── Campos del nodo IMAGE ─────────────────────────────────────────────────
+# ──── Campos del nodo IMAGE ──────────────────────────────────────────────────
 
 ## Ruta de la imagen a inyectar
 @export var image_path: String = ""
 
-## Tag que se inserta en el texto del nodo anterior: [img]ruta[/img]
+## Tag BBCode generado automáticamente
 var inject_tag: String:
 	get:
 		if image_path.is_empty():
 			return ""
 		return "[img]%s[/img]" % image_path
 
+# ──── Campos del nodo CONDITION ──────────────────────────────────────────────
 
-## Inicializa el nodo con un ID único
+## Nombre de la variable a evaluar (ej: "player_health")
+@export var condition_variable: String = ""
+
+## Operador de comparación
+@export var condition_operator: ConditionOperator = ConditionOperator.EQUALS
+
+## Valor contra el que comparar (como string; se intenta parsear a número)
+@export var condition_value: String = ""
+
+# ──── Campos del nodo ANIMATION ──────────────────────────────────────────────
+
+@export var tween_type: TweenType = TweenType.FADE
+
+@export var tween_duration: float = 0.35
+
+@export var tween_delay: float = 0.0
+
+@export var tween_offset: Vector2 = Vector2(120, 0)
+
+@export var tween_start_scale: Vector2 = Vector2(0.85, 0.85)
+
+# ──── Campos del nodo START ──────────────────────────────────────────────────
+
+## Etiqueta opcional para identificar este punto de entrada
+@export var start_label: String = "Inicio"
+
+# ──── Campos del nodo END ────────────────────────────────────────────────────
+
+## Etiqueta opcional para identificar el cierre
+@export var end_label: String = "Fin"
+
+# ──── Setup ──────────────────────────────────────────────────────────────────
+
+## Inicializa el nodo con un ID único basado en tipo y timestamp
 func setup(type: NodeType) -> void:
 	node_type = type
 	id = "%s_%d" % [NodeType.keys()[type], Time.get_ticks_msec()]

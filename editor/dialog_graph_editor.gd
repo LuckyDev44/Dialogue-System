@@ -35,7 +35,7 @@ const NODE_LABELS := {
 
 # ── Referencias a nodos de la escena ─────────────────────────────────────────
 @onready var graph_edit: GraphEdit       = %GraphEdit
-@onready var opt_node_type: OptionButton = %OptNodeType    ## ← nuevo dropdown
+@onready var opt_node_type: OptionButton = %OptNodeType   ## ← nuevo dropdown
 @onready var btn_add: Button             = %BtnAdd         ## ← único botón "+"
 @onready var btn_save: Button            = %BtnSave
 @onready var btn_load: Button            = %BtnLoad
