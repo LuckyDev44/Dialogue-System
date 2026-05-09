@@ -1,42 +1,100 @@
 # DialogSystem — Godot 4.3 Dialogue Plugin
 
-A modular node-based Dialogue System for Godot 4.3 focused on dynamic conversations, branching dialogue and scalable narrative workflows.
+A modular **node-based Dialogue System** for Godot 4.3 focused on dynamic conversations, branching dialogue and scalable narrative workflows.
 
-Built with a visual GraphEdit interface, this plugin allows you to create dialogue sequences, conditional routes, random events and animated textbox flows directly inside the editor.
+Built with a fully visual **GraphEdit interface**, DialogSystem allows developers to create dialogue sequences, conditional routes, random events and animated textbox flows directly inside the Godot editor.
 
-Like many modern development workflows, this project occasionally uses AI-assisted tooling for productivity tasks such as debugging, documentation and boilerplate assistance.
+> Like many modern development workflows, this project occasionally uses AI-assisted tooling for productivity tasks such as debugging, documentation and boilerplate assistance.
+
 ---
 
 # ✨ Features
 
-* Visual node-based dialogue editor
-* Dialogue and image nodes
-* Random dialogue branching
-* Conditional dialogue routes
-* Start and End sequence nodes
-* Dialogue animation nodes
+## 🎨 Visual Dialogue Editor
+
+* Node-based GraphEdit workflow
+* Drag & connect dialogue logic visually
+* Modular and expandable architecture
+
+## 💬 Dialogue System
+
+* Dialogue nodes
+* Image injection nodes
 * Typewriter effect
 * BBCode support
-* Multi-track audio support
+* Multi-track audio playback
+
+## 🔀 Dynamic Flow Control
+
+* Random branching nodes
+* Conditional dialogue routes
+* Start / End sequence nodes
+* Runtime context variable system
+
+## ✨ Advanced Tween Animations
+
+* Textbox intro/outro tween animations
+* Multiple tween presets
+* Transition & easing controls
+* Offset and scale customization
+* VN-style presentation workflow
+
+## 💾 Serialization
+
 * Serializable `.tres` dialogue graphs
-* Modular and expandable architecture
+* Save/load compatible architecture
 
 ---
 
 # 📦 Installation
 
-1. Download or clone the repository.
-2. Copy the `dialog_system` folder into your project's `addons/` directory.
-3. Open your Godot 4.3 project.
-4. Go to:
+## Important
+
+If you downloaded the repository as ZIP, rename the folder:
+
+```text
+Dialogue-System-main
+```
+
+to:
+
+```text
+dialog_system
+```
+
+before placing it inside:
+
+```text
+addons/
+```
+
+The plugin uses fixed internal paths based on:
+
+```text
+res://addons/dialog_system/
+```
+
+---
+
+## Setup
+
+1. Download or clone the repository
+2. Move the folder into:
+
+```text
+addons/dialog_system/
+```
+
+3. Open your Godot 4.3 project
+4. Navigate to:
 
 ```text
 Project → Project Settings → Plugins
 ```
 
-5. Enable **DialogSystem**.
+5. Enable **DialogSystem**
 
-Once enabled, the plugin will appear inside the editor automatically.
+Once enabled, the editor panel will appear automatically.
 
 ---
 
@@ -57,35 +115,33 @@ func start_dialog() -> void:
 
 # 🧩 Available Node Types
 
-| Node      | Description                     |
-| --------- | ------------------------------- |
-| DIALOG    | Standard dialogue node          |
-| IMAGE     | Inject images into dialogue     |
-| RANDOM    | Randomly selects a branch       |
-| CONDITION | Branches depending on variables |
-| START     | Entry point node                |
-| END       | Ends the dialogue sequence      |
-| ANIMATION | Controls textbox animations     |
+| Node        | Description                 |
+| ----------- | --------------------------- |
+| `DIALOG`    | Standard dialogue node      |
+| `IMAGE`     | Inject images into dialogue |
+| `RANDOM`    | Random branch selector      |
+| `CONDITION` | Variable-based branching    |
+| `START`     | Dialogue entry point        |
+| `END`       | Ends dialogue sequence      |
+| `ANIMATION` | Controls textbox tweens     |
 
 ---
 
 # 🔀 Conditional Dialogues
 
-Condition nodes support operators such as:
+Condition nodes support:
 
-* `==`
-* `!=`
-* `>`
-* `<`
-* `>=`
-* `<=`
+```text
+==  !=  >  <  >=  <=
+```
 
 Example:
 
 ```gdscript
 dialog.context_variables = {
     "player_health": 100,
-    "has_key": true
+    "has_key": true,
+    "reputation": 5
 }
 ```
 
@@ -103,7 +159,7 @@ You found [img]res://sprites/key.png[/img] a golden key!
 
 | Signal                    | Description                        |
 | ------------------------- | ---------------------------------- |
-| `dialog_started`          | Triggered when dialogue starts     |
+| `dialog_started`          | Triggered when dialogue begins     |
 | `dialog_node_shown(data)` | Triggered when a node is displayed |
 | `dialog_finished`         | Triggered when dialogue ends       |
 
@@ -111,97 +167,93 @@ You found [img]res://sprites/key.png[/img] a golden key!
 
 # 📋 Version Control
 
-## v1.1.1 — Advanced Tween System
+# v1.1.1 — Advanced Tween System
 
-> Fully customizable textbox tween animations · Transition & easing controls
+> Fully customizable textbox tween animations with transition & easing support.
 
-### Added
+## Added
 
 * Advanced tween animation system
 * Tween transition selector
 * Tween ease selector
-* Tween mode selector (INTRO / OUTRO / BOTH)
-* Offset controls
-* Scale controls
-* Runtime tween playback system
+* Tween mode selector
+* Offset & scale controls
+* Runtime tween playback
 
-### New Tween Types
+## Tween Types
 
-* FADE
-* SLIDE_LEFT
-* SLIDE_RIGHT
-* SLIDE_UP
-* SCALE
-* POP
-* BOUNCE
+* `FADE`
+* `SLIDE_LEFT`
+* `SLIDE_RIGHT`
+* `SLIDE_UP`
+* `SCALE`
+* `POP`
+* `BOUNCE`
 
-### Supported Transitions
+## Supported Transitions
 
-* LINEAR
-* SINE
-* QUAD
-* CUBIC
-* QUART
-* QUINT
-* EXPO
-* BACK
-* BOUNCE
-* ELASTIC
+* `LINEAR`
+* `SINE`
+* `QUAD`
+* `CUBIC`
+* `QUART`
+* `QUINT`
+* `EXPO`
+* `BACK`
+* `BOUNCE`
+* `ELASTIC`
 
-### Supported Ease Modes
+## Supported Ease Modes
 
-* IN
-* OUT
-* IN_OUT
-* OUT_IN
+* `IN`
+* `OUT`
+* `IN_OUT`
+* `OUT_IN`
 
-### Improved
+## Improvements
 
-* More dynamic textbox presentation
-* VN-style animation workflows
-* Better UI feedback during dialogue transitions
-* Modular tween architecture for future expansion
+* Better VN-style presentation
+* Improved textbox feedback
+* Modular tween architecture
 
-## v1.1 — Dynamic & Modular Flow
+---
 
-> Random nodes · Conditions · Animation nodes · Improved toolbar workflow
+# v1.1 — Dynamic & Modular Flow
 
-### Added
+> Random nodes, conditions and expanded editor workflow.
+
+## Added
 
 * Random branch node
 * Condition node
 * Start node
 * End node
 * Animation node
-* Dropdown-based toolbar
-* Multi-output support for random branches
-* Conditional execution system
-* Animation sequencing support
+* Dropdown toolbar workflow
+* Multi-output branch support
 
-### Improved
+## Improvements
 
-* Cleaner Graph Editor workflow
-* More scalable node spawning system
-* Expanded node type architecture
-* Runtime condition parsing
+* Cleaner Graph Editor UX
+* Better runtime parsing
+* Scalable node spawning architecture
 
 ---
 
-## v1.0 — Initial Functional Release
+# v1.0 — Initial Functional Release
 
-> Core dialogue workflow · Graph editor · Typewriter system
+> Core dialogue framework and visual editor.
 
-### Added
+## Added
 
-* Visual GraphEdit dialogue editor
+* Visual GraphEdit editor
 * Dialogue nodes
 * Image nodes
 * Typewriter effect
 * BBCode support
-* Multi-track audio playback
+* Audio playback system
 * `.tres` graph serialization
 * Runtime dialogue controller
-* Dialogue signals system
 
 ---
 
@@ -221,5 +273,5 @@ Planned future features:
 # 🛠️ Built With
 
 * Godot 4.3
-* GraphEdit / GraphNode
 * GDScript
+* GraphEdit / GraphNode
