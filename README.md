@@ -4,6 +4,7 @@ A modular node-based Dialogue System for Godot 4.3 focused on dynamic conversati
 
 Built with a visual GraphEdit interface, this plugin allows you to create dialogue sequences, conditional routes, random events and animated textbox flows directly inside the editor.
 
+Like many modern development workflows, this project occasionally uses AI-assisted tooling for productivity tasks such as debugging, documentation and boilerplate assistance.
 ---
 
 # ✨ Features
