@@ -1,0 +1,100 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgt8ead322e7"]
+
+[ext_resource type="Script" path="res://addons/dialog_system/nodes/dialog_textbox.gd" id="1_pa1je"]
+[ext_resource type="FontFile" uid="uid://bsqq1u7n1eswj" path="res://fonts/regular/yoster.ttf" id="2_dmexf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63flx"]
+bg_color = Color(0, 0, 0, 0.156863)
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.313726)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_5d215"]
+font = ExtResource("2_dmexf")
+font_size = 11
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.109804)
+
+[node name="DTB" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pa1je")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = 0.833
+anchor_right = 0.725
+anchor_bottom = 0.967
+offset_top = 0.159973
+offset_bottom = -0.160034
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_63flx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconLeft" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelCharName" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Jonh Wacky"
+label_settings = SubResource("LabelSettings_5d215")
+
+[node name="RichText" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.156863)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("2_dmexf")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Jonh Wacky"
+fit_content = true
+scroll_active = false
+
+[node name="IconRight" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="AdvanceIndicator" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -23.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "▼"
+horizontal_alignment = 1
+vertical_alignment = 1

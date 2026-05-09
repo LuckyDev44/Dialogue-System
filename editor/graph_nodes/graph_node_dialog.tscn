@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://clxucpheeadfe"]
+
+[ext_resource type="Script" path="res://addons/dialog_system/editor/graph_nodes/graph_node_dialog.gd" id="1_udv81"]
+
+[node name="GraphNodeDialog" type="GraphNode"]
+offset_right = 272.0
+offset_bottom = 304.0
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_udv81")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FieldCharName" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Char Name"
+
+[node name="FieldText" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Dialog"
+
+[node name="OptFlow" type="OptionButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SpinDelay" type="SpinBox" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.1
+max_value = 30.0
+step = 0.1
+value = 0.1
+
+[node name="OptIconPos" type="OptionButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Left Icon:"
+
+[node name="FieldIconLeft" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ContainerIconRight" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ContainerIconRight"]
+layout_mode = 2
+text = "Right Icon:"
+
+[node name="FieldIconRight" type="LineEdit" parent="VBoxContainer/ContainerIconRight"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AudioList" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BtnAddAudio" type="Button" parent="VBoxContainer/AudioList"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add track"
