@@ -113,6 +113,105 @@ func _unhandled_input(event: InputEvent) -> void:
 # FLUJO
 # ─────────────────────────────────────────────────────────────
 
+func _play_textbox_tween(tween_data: DialogNodeData) -> void:
+
+	if not _textbox:
+		return
+
+	await get_tree().create_timer(tween_data.tween_delay).timeout
+
+	var tween := create_tween()
+
+	match tween_data.tween_type:
+
+		DialogNodeData.TweenType.FADE:
+			_textbox.modulate.a = 0.0
+
+			tween.tween_property(
+				_textbox,
+				"modulate:a",
+				1.0,
+				tween_data.tween_duration
+			).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+		DialogNodeData.TweenType.SLIDE_LEFT:
+			var target := _textbox.position
+			_textbox.position = target - Vector2(tween_data.tween_offset.x, 0)
+
+			tween.tween_property(
+				_textbox,
+				"position",
+				target,
+				tween_data.tween_duration
+			).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+
+		DialogNodeData.TweenType.SLIDE_RIGHT:
+			var target := _textbox.position
+			_textbox.position = target + Vector2(tween_data.tween_offset.x, 0)
+
+			tween.tween_property(
+				_textbox,
+				"position",
+				target,
+				tween_data.tween_duration
+			).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+
+		DialogNodeData.TweenType.SLIDE_UP:
+			var target := _textbox.position
+			_textbox.position = target + Vector2(0, tween_data.tween_offset.y)
+
+			tween.tween_property(
+				_textbox,
+				"position",
+				target,
+				tween_data.tween_duration
+			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+		DialogNodeData.TweenType.SCALE:
+			_textbox.scale = tween_data.tween_start_scale
+
+			tween.tween_property(
+				_textbox,
+				"scale",
+				Vector2.ONE,
+				tween_data.tween_duration
+			).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+
+
+		DialogNodeData.TweenType.POP:
+			_textbox.scale = Vector2(0.7, 0.7)
+
+			tween.tween_property(
+				_textbox,
+				"scale",
+				Vector2(1.1, 1.1),
+				tween_data.tween_duration * 0.6
+			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+			tween.tween_property(
+				_textbox,
+				"scale",
+				Vector2.ONE,
+				tween_data.tween_duration * 0.4
+			).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
+
+		DialogNodeData.TweenType.BOUNCE:
+			_textbox.position.y += tween_data.tween_offset.y
+
+			tween.tween_property(
+				_textbox,
+				"position:y",
+				_textbox.position.y - tween_data.tween_offset.y,
+				tween_data.tween_duration
+			).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
+	await tween.finished
+	
 func _show_node(node_id: String) -> void:
 	if node_id.is_empty():
 		finish()
@@ -145,7 +244,7 @@ func _show_node(node_id: String) -> void:
 			return
 
 		DialogNodeData.NodeType.ANIMATION:
-			_current_tween_data = data
+			_play_textbox_tween(data)
 			_go_to_next()
 			return
 
@@ -338,3 +437,41 @@ func _evaluate_condition(data: DialogNodeData) -> bool:
 			return variable_value <= compare_value
 
 	return false
+	
+func _get_transition(t: int) -> Tween.TransitionType:
+	match t:
+		DialogNodeData.TweenTransition.LINEAR:
+			return Tween.TRANS_LINEAR
+		DialogNodeData.TweenTransition.SINE:
+			return Tween.TRANS_SINE
+		DialogNodeData.TweenTransition.QUAD:
+			return Tween.TRANS_QUAD
+		DialogNodeData.TweenTransition.CUBIC:
+			return Tween.TRANS_CUBIC
+		DialogNodeData.TweenTransition.QUART:
+			return Tween.TRANS_QUART
+		DialogNodeData.TweenTransition.QUINT:
+			return Tween.TRANS_QUINT
+		DialogNodeData.TweenTransition.EXPO:
+			return Tween.TRANS_EXPO
+		DialogNodeData.TweenTransition.BACK:
+			return Tween.TRANS_BACK
+		DialogNodeData.TweenTransition.BOUNCE:
+			return Tween.TRANS_BOUNCE
+		DialogNodeData.TweenTransition.ELASTIC:
+			return Tween.TRANS_ELASTIC
+
+	return Tween.TRANS_LINEAR
+	
+func _get_ease(e: int) -> Tween.EaseType:
+	match e:
+		DialogNodeData.TweenEase.IN:
+			return Tween.EASE_IN
+		DialogNodeData.TweenEase.OUT:
+			return Tween.EASE_OUT
+		DialogNodeData.TweenEase.IN_OUT:
+			return Tween.EASE_IN_OUT
+		DialogNodeData.TweenEase.OUT_IN:
+			return Tween.EASE_OUT_IN
+
+	return Tween.EASE_OUT

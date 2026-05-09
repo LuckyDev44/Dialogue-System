@@ -110,6 +110,57 @@ You found [img]res://sprites/key.png[/img] a golden key!
 
 # 📋 Version Control
 
+## v1.1.1 — Advanced Tween System
+
+> Fully customizable textbox tween animations · Transition & easing controls
+
+### Added
+
+* Advanced tween animation system
+* Tween transition selector
+* Tween ease selector
+* Tween mode selector (INTRO / OUTRO / BOTH)
+* Offset controls
+* Scale controls
+* Runtime tween playback system
+
+### New Tween Types
+
+* FADE
+* SLIDE_LEFT
+* SLIDE_RIGHT
+* SLIDE_UP
+* SCALE
+* POP
+* BOUNCE
+
+### Supported Transitions
+
+* LINEAR
+* SINE
+* QUAD
+* CUBIC
+* QUART
+* QUINT
+* EXPO
+* BACK
+* BOUNCE
+* ELASTIC
+
+### Supported Ease Modes
+
+* IN
+* OUT
+* IN_OUT
+* OUT_IN
+
+### Improved
+
+* More dynamic textbox presentation
+* VN-style animation workflows
+* Better UI feedback during dialogue transitions
+* Modular tween architecture for future expansion
+
 ## v1.1 — Dynamic & Modular Flow
 
 > Random nodes · Conditions · Animation nodes · Improved toolbar workflow

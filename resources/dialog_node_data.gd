@@ -57,6 +57,33 @@ enum TweenType {
 	POP,
 	BOUNCE,
 }
+
+enum TweenTransition {
+	LINEAR,
+	SINE,
+	QUAD,
+	CUBIC,
+	QUART,
+	QUINT,
+	EXPO,
+	BACK,
+	BOUNCE,
+	ELASTIC,
+}
+
+enum TweenEase {
+	IN,
+	OUT,
+	IN_OUT,
+	OUT_IN,
+}
+
+enum TweenMode {
+	INTRO,
+	OUTRO,
+	BOTH,
+}
+
 # ──── Campos comunes ─────────────────────────────────────────────────────────
 
 ## Identificador único del nodo
@@ -121,13 +148,16 @@ var inject_tag: String:
 
 @export var tween_type: TweenType = TweenType.FADE
 
-@export var tween_duration: float = 0.35
+@export var tween_transition: TweenTransition = TweenTransition.SINE
+@export var tween_ease: TweenEase = TweenEase.OUT
+@export var tween_mode: TweenMode = TweenMode.INTRO
 
+@export var tween_duration: float = 0.4
 @export var tween_delay: float = 0.0
 
-@export var tween_offset: Vector2 = Vector2(120, 0)
+@export var tween_offset: Vector2 = Vector2(300, 120)
 
-@export var tween_start_scale: Vector2 = Vector2(0.85, 0.85)
+@export var tween_start_scale: Vector2 = Vector2(0.8, 0.8)
 
 # ──── Campos del nodo START ──────────────────────────────────────────────────
 

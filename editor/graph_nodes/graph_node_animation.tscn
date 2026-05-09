@@ -30,6 +30,30 @@ text = "Tipo de Tween"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="Label7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tipo de Interpolación"
+
+[node name="OptTransition" type="OptionButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tipo de Ease"
+
+[node name="OptEase" type="OptionButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Modo de Tween"
+
+[node name="OptMode" type="OptionButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Duration"
