@@ -16,7 +16,7 @@ extends Control
 ##   └── AnimationPlayer
 ##   └── Label (AdvanceIndicator) ▼
 
-signal hidde
+signal hidden_tb
 
 @onready var icon_left: TextureRect       = %IconLeft
 @onready var icon_right: TextureRect      = %IconRight
@@ -51,7 +51,7 @@ func hide_textbox() -> void:
 		anim_player.play("hide")
 		await anim_player.animation_finished
 	hide()
-	hidde.emit()
+	hidden_tb.emit()
 
 
 ## Establece el nombre del personaje

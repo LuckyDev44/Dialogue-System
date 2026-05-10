@@ -87,7 +87,7 @@ func finish() -> void:
 
 	if _textbox:
 		_textbox.hide_textbox()
-		await _textbox.hidde
+		await _textbox.hidden_tb
 		_textbox.queue_free()
 		_textbox = null
 
@@ -244,8 +244,19 @@ func _show_node(node_id: String) -> void:
 			return
 
 		DialogNodeData.NodeType.ANIMATION:
-			_play_textbox_tween(data)
-			_go_to_next()
+			# Detectar si el siguiente nodo es END antes de ejecutar
+			var next_id := dialog_resource.get_next_node_id(data.id)
+			var next_data := dialog_resource.get_node_by_id(next_id)
+			var next_is_end := next_data != null and next_data.node_type == DialogNodeData.NodeType.END
+
+			# Esperar a que el tween termine
+			await _play_textbox_tween(data)
+
+			if next_is_end:
+				# Era animacion de salida: cerrar la secuencia
+				finish()
+			else:
+				_go_to_next()
 			return
 
 		DialogNodeData.NodeType.RANDOM:

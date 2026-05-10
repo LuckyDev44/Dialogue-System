@@ -63,6 +63,7 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 5000.0
 step = 0.01
+allow_lesser = true
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -73,6 +74,7 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 5000.0
 step = 0.01
+allow_lesser = true
 
 [node name="Label4" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -83,6 +85,7 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 5000.0
 step = 0.01
+allow_lesser = true
 
 [node name="Label5" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -93,6 +96,7 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 5000.0
 step = 0.01
+allow_lesser = true
 
 [node name="Label6" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -103,9 +107,11 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 5000.0
 step = 0.01
+allow_lesser = true
 
 [node name="ScaleY" type="SpinBox" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 5000.0
 step = 0.01
+allow_lesser = true
