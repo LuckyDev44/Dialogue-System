@@ -167,6 +167,10 @@ You found [img]res://sprites/key.png[/img] a golden key!
 
 # 📋 Version Control
 
+# v1.1.2 — MinorFixes
+
+> Minor Fixes
+
 # v1.1.1 — Advanced Tween System
 
 > Fully customizable textbox tween animations with transition & easing support.
